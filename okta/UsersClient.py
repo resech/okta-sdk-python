@@ -15,7 +15,7 @@ class UsersClient(ApiClient):
 
     # CRUD
 
-    def get_users(self, limit=None, query=None, filter_string=None):
+    def get_users(self, limit=None, query=None, filter_string=None, search_string=None):
         """Get a list of Users
 
         :param limit: maximum number of users to return
@@ -24,12 +24,15 @@ class UsersClient(ApiClient):
         :type query: str or None
         :param filter_string: string to filter users
         :type filter_string: str or None
+        :param search_string: string to search users
+        :type search_string: str or None
         :rtype: list of User
         """
         params = {
             'limit': limit,
             'q': query,
-            'filter': filter_string
+            'filter': filter_string,
+            'search': search_string
         }
         response = ApiClient.get_path(self, '/', params=params)
         return Utils.deserialize(response.text, User)
